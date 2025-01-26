@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Yield Prediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body class="bg-gray-900 text-gray-300 relative overflow-hidden">
+    <div class="container mx-auto p-8 overflow-y-scroll" style="height: 100vh;">
+        <h1 class="text-center text-5xl font-extrabold text-green-500 mb-8">Crop Yield Prediction</h1>
+        <form action="/predict" method="POST" class="mx-auto bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-lg">
+            <div class="form-group mb-6">
+                <label for="crop" class="block mb-2 text-lg text-gray-200">Crop:</label>
+                <select name="crop" id="crop" class="form-control bg-gray-700 text-gray-200">
+                    {% for crop in crops %}
+                        <option value="{{ crop }}">{{ crop }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-6">
+                <label for="variety" class="block mb-2 text-lg text-gray-200">Variety:</label>
+                <select name="variety" id="variety" class="form-control bg-gray-700 text-gray-200">
+                    <!-- Varieties will be populated by JavaScript -->
+                </select>
+            </div>
+            <div class="form-group mb-6">
+                <label for="state" class="block mb-2 text-lg text-gray-200">State:</label>
+                <select name="state" id="state" class="form-control bg-gray-700 text-gray-200">
+                    {% for state in states %}
+                        <option value="{{ state }}">{{ state }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-6">
+                <label for="cost" class="block mb-2 text-lg text-gray-200">Cost:</label>
+                <input type="number" name="cost" id="cost" class="form-control bg-gray-700 text-gray-200" required>
+            </div>
+            <div class="form-group mb-6">
+                <label for="quantity" class="block mb-2 text-lg text-gray-200">Quantity (in hectares):</label>
+                <input type="number" name="quantity" id="quantity" class="form-control bg-gray-700 text-gray-200" required>
+            </div>
+            <div class="form-group mb-6">
+                <label for="duration" class="block mb-2 text-lg text-gray-200">Duration (in days):</label>
+                <input type="number" name="duration" id="duration" class="form-control bg-gray-700 text-gray-200" required>
+            </div>
+            <div class="form-group mb-6">
+                <label for="unit" class="block mb-2 text-lg text-gray-200">Unit:</label>
+                <select name="unit" id="unit" class="form-control bg-gray-700 text-gray-200">
+                    {% for unit in units %}
+                        <option value="{{ unit }}">{{ unit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-full bg-green-500 text-gray-900 py-2 rounded-lg hover:bg-green-600 transition duration-300">Predict</button>
+        </form>
+        {% if prediction %}
+            <div class="result mt-8 p-4 text-center bg-gray-800 text-green-500 rounded-lg shadow-xl mx-auto">
+                <h2 class="text-2xl mb-2">Predicted Crop Production:</h2>
+                <p class="text-3xl">{{ prediction }} {{ unit }}</p>
+            </div>
+        {% elif error_message %}
+            <div class="error mt-8 p-4 text-center bg-red-800 text-red-500 rounded-lg shadow-xl mx-auto">
+                <h2 class="text-2xl mb-2">Error:</h2>
+                <p>{{ error_message }}</p>
+                <div class="available mt-4">
+                    <h3 class="text-xl">Available Crops and Varieties in {{ state }}:</h3>
+                    <ul>
+                        {% for crop, varieties in available_crops_varieties.items() %}
+                            <li><strong>{{ crop }}:</strong> {{ varieties | join(', ') }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="recommended mt-4">
+                    <h3 class="text-xl">Recommended States for {{ crop }} - {{ variety }}:</h3>
+                    <ul>
+                        {% for state in recommended_states %}
+                            <li>{{ state }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        <footer class="text-center mt-8">
+            <a href="https://www.linkedin.com/in/mohammed-ameen-ul-haq-a37b0b234/" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-800 rounded-full text-green-500 hover:text-green-600 transition duration-300">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6">
+            </a>
+            <a href="https://www.instagram.com/its.ameen144" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-800 rounded-full text-green-500 hover:text-green-600 transition duration-300">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" alt="Instagram" class="w-6 h-6">
+            </a>
+        </footer>
+    </div>
+</body>
+</html>

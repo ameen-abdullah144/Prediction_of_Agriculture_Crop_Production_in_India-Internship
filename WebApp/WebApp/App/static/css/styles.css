@@ -1,0 +1,147 @@
+body, h1, h2, form, label, input, select, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1e293b; /* Dark gray background */
+    color: #cbd5e1; /* Light gray text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #22c55e; /* Highlighted green heading */
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+form, .result, .error {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.form-group label {
+    color: #cbd5e1;
+}
+
+.form-control {
+    background: #334155; /* Darker gray for input background */
+    color: #cbd5e1;
+    border: 1px solid #4b5563; /* Medium gray border */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #22c55e; /* Green border on focus */
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); /* Green glow on focus */
+}
+
+.form-control:hover {
+    background: #475569; /* Slightly lighter background on hover */
+    transform: scale(1.02);
+}
+
+.btn-primary {
+    background-color: #22c55e; /* Green button */
+    color: #1e293b;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #16a34a; /* Darker green on hover */
+    color: #1e293b;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.result, .error {
+    background: #334155; /* Same darker gray as form control */
+    border: 1px solid #22c55e; /* Green border */
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease;
+    max-width: 500px;
+    width: 100%;
+}
+
+.error {
+    background: #2d3748; /* Slate gray background */
+    border: 1px solid #e53e3e; /* Red border */
+}
+
+.result p, .error p {
+    font-size: 1.5em;
+    color: #22c55e;
+    text-align: center;
+    text-shadow: 0 0 10px #22c55e;
+}
+
+.error p {
+    color: #e53e3e; /* Red text for error */
+}
+
+.recommended ul, .available ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.recommended li, .available li {
+    color: #cbd5e1; /* Light gray for recommended text */
+    margin: 5px 0;
+}
+
+.sticky-footer {
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+    transform: translateY(50%);
+    background-color: #1e293b;
+    padding: 1rem;
+    border-radius: 5px 0 0 5px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sticky-footer a {
+    color: #22c55e;
+    text-decoration: underline;
+}
+
+.sticky-footer a:hover {
+    color: #16a34a; /* Darker green on hover */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
