@@ -46,7 +46,7 @@ state_crop_variety_map = {
     "Andhra Pradesh": {
         "Paddy": ["Chinsurah Rice (IET 19140)", "CR Dhan 401 (REETA)", "CR Dhan 601 (IET 18558)"],
         "Groundnut": ["Kadiri Harithandhra (K 1319)", "GPBD 5"]
-    },
+    }m,
     "Nagaland": {
         "Paddy": ["(CNI 383-5-11)"],
         "Wheat": ["Pusa Suketi HS 507", "Pusa Prachi (HI 1563)"],
